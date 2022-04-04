@@ -8,11 +8,19 @@ var callFunctionStart = function (){
 
     const data = [
         {
-            "id": "موجودی اولیه صندوق",
+            "id": 1,
             "price": 5000,
-            "type": "deposit",
+            "desc": "موجودی اولیه صندوق",
+            "type": "واریز",
             "date": new Date(),
-          },    
+        },
+        {
+            "id": 2,
+            "price": 3000,
+            "desc": "واریز به صندوق توسط آقای ایمانی",
+            "type": "واریز",
+            "date": new Date(),
+        }
     ];
 
     var storedNames = JSON.parse(localStorage.getItem("data_practise"));
@@ -24,7 +32,10 @@ var callFunctionStart = function (){
     }
     console.log('load data');
 
-    // const showData = storedNames.map( (d,i) => '<li>' + d + '</li>');
+    document.getElementById('dataTable').innerHTML = storedNames.map((data, i) =>
+        // '<li>' + d.id + ' '+d.price+' '+ d.desc+' '+d.type+' '+d.date+ '</li>'
+        '<tr><td>'+data.id+'</td><td>'+data.price+'</td><td>'+data.type+'</td><td>'+data.desc+'</td><td>'+data.date+'</td></tr>'
+    );
 
 }
 
