@@ -9,7 +9,7 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
             <div class="h3 text-success">صندوق ثبت درامد و هزینه</div>
@@ -33,28 +33,39 @@
 
     <!--    <button id="testClick">click me!</button>-->
     <div class="row" id="insertedItemDiv" style="display: none;">
-        <div class=" col-md">
-            <label> مبلغ
-                <input required class="form-control" type="number" name="price" id="price"/>
-            </label>
-            <label> نوع
-                <select class="form-control" name="type" id="type"><option value="1" selected> واریز</option><option value="2"> برداشت</option></select>
-            </label>
-            <label> توضیحات
-                <input required class="form-control" type="text" name="desc" id="desc"/>
-            </label>
-            <button class="btn btn-md btn-primary" id="btnInserted"> ثبت جدید </button>
+        <div class="col-md-12">
+                <label> مبلغ
+                    <input required class="form-control" type="number" name="price" id="price"/>
+                </label>
+                <label> نوع
+                    <select class="form-control" name="type" id="type">
+                        <option value="1" selected> واریز</option>
+                        <option value="2"> برداشت</option>
+                    </select>
+                </label>
+                <label> توضیحات
+                    <input required class="form-control" type="text" name="desc" id="desc"/>
+                </label>
+                <label> تاریخ:
+                    <input placeholder=" 21 روز" required class="form-control" type="number" name="day" id="day"/>
+                    <input placeholder="ماه 10" required class="form-control" type="number" name="month" id="month"/>
+                    <input placeholder="سال 1401" required class="form-control" type="number" name="year" id="year"/>
+                </label>
+
+            <button class="btn btn-md btn-primary" id="btnInserted"> ثبت جدید</button>
         </div>
     </div>
     <div>
         <label class="float-right" for="dataTable"> موجودی صندوق</label>
-        <table class="table ">
+        <table class="table table-striped table-dark ">
             <thead>
-            <th>id</th>
-            <th>price</th>
-            <th>desc</th>
-            <th>type</th>
-            <th>date</th>
+            <tr>
+                <th>id</th>
+                <th>price</th>
+                <th>desc</th>
+                <th>type</th>
+                <th>date</th>
+            </tr>
             </thead>
             <tbody id="dataTable">
             </tbody>

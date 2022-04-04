@@ -53,7 +53,7 @@ var callFunctionStart = function () {
         }
     ];
 
-    var storedNames = JSON.parse(localStorage.getItem("data_practice"));
+    const storedNames = JSON.parse(localStorage.getItem("data_practice"));
     // console.log(storedNames.length);
 
     if (storedNames === null) {
@@ -66,13 +66,17 @@ var callFunctionStart = function () {
         // '<li>' + d.id + ' '+d.price+' '+ d.desc+' '+d.type+' '+d.date+ '</li>'
         '<tr>' +
         '<td>' + data.id + '</td>' +
-        '<td>' + data.price + '</td>' +
+        '<td>' + numberWithCommas(data.price) + '</td>' +
         '<td>' + data.desc + '</td>' +
         '<td>' + (data.type === 1 ? '<lable class="text-success">واریز</lable>' : '<lable class="text-danger">برداشت</lable>') + '</td>' +
         '<td>' + data.date + '</td>' +
         '</tr>'
     );
 
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 
