@@ -7,72 +7,172 @@
     <title>practice1 : zare- roocket</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/ffa/font-face.css">
+    <link rel="stylesheet" href="css/persianDatepicker-default.css" />
 </head>
 <body>
-<div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-            <div class="h3 text-success">صندوق ثبت درامد و هزینه</div>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<div class="container">
+    <div class="h3 text-success" style="opacity: 1!important;">صندوق ثبت درامد و هزینه</div>
+    <div class="row flex" style="flex: content; flex-wrap: wrap; flex-basis: content;">
+        <div class="col-4 mt-4 mr-auto">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">فرم ثبت جدید</h5>
+                    <div class="col-md-12">
+                        <label> مبلغ
+                            <input required class="form-control" type="number" name="price" id="price"/>
+                        </label>
+                        <label> نوع
+                            <select class="form-control" name="type" id="type">
+                                <option value="1" selected> واریز</option>
+                                <option value="2"> برداشت</option>
+                            </select>
+                        </label>
+                        <label> توضیحات
+                            <textarea required class="form-control" name="desc" id="desc"></textarea>
+                        </label>
+                        <label> تاریخ:
+                            <input required class="form-control" type="text" name="dateTime"
+                                   id="dateTime"/>
+<!--                            <input placeholder=" 21 روز" required class="form-control" type="number" name="day"-->
+<!--                                   id="day"/>-->
+<!--                            <input placeholder="ماه 10" required class="form-control" type="number" name="month"-->
+<!--                                   id="month"/>-->
+<!--                            <input placeholder="سال 1401" required class="form-control" type="number" name="year"-->
+<!--                                   id="year"/>-->
+                        </label>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="./index.html">نمایش لیست <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item" id="insertData">
-                    <a class="nav-link" href="#">ثبت اطلاعات جدید</a>
-                </li>
-            </ul>
+                        <button class="btn btn-md btn-primary" id="btnInserted"> ثبت جدید</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
+        <div class="col-4 mt-4 ml-auto">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">موجودی صندوق</h5>
+                    <a href="#" class="badge badge-success">هزینه : <span id="deposit" class="h3 badge badge-pill badge-success"></span>
+                    </a>
+                    <a href="#" class="badge badge-danger h3"> خرج کرد : <span id="withdraw" class="h3 badge badge-pill badge-danger"></span></a>
 
-    <!--    <button id="testClick">click me!</button>-->
-    <div class="row" id="insertedItemDiv" style="display: none;">
-        <div class="col-md-12">
-                <label> مبلغ
-                    <input required class="form-control" type="number" name="price" id="price"/>
-                </label>
-                <label> نوع
-                    <select class="form-control" name="type" id="type">
-                        <option value="1" selected> واریز</option>
-                        <option value="2"> برداشت</option>
-                    </select>
-                </label>
-                <label> توضیحات
-                    <input required class="form-control" type="text" name="desc" id="desc"/>
-                </label>
-                <label> تاریخ:
-                    <input placeholder=" 21 روز" required class="form-control" type="number" name="day" id="day"/>
-                    <input placeholder="ماه 10" required class="form-control" type="number" name="month" id="month"/>
-                    <input placeholder="سال 1401" required class="form-control" type="number" name="year" id="year"/>
-                </label>
-
-            <button class="btn btn-md btn-primary" id="btnInserted"> ثبت جدید</button>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
         </div>
     </div>
-    <div>
-        <label class="float-right" for="dataTable"> موجودی صندوق</label>
-        <table class="table table-striped table-dark ">
+
+    <div class="table-responsive pt-3">
+        <table border="0" class="table table-striped table-dark " style="border-radius: 20px !important;">
             <thead>
             <tr>
-                <th>id</th>
-                <th>price</th>
-                <th>desc</th>
-                <th>type</th>
-                <th>date</th>
+                <th>ردیف</th>
+                <th> قیمت</th>
+                <th> نوع</th>
+                <th> تاریخ</th>
+                <th> عملیات</th>
             </tr>
             </thead>
             <tbody id="dataTable">
             </tbody>
         </table>
     </div>
-</div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> نمایش اطلاعات </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header">
+                            نمایش
+                        </div>
+                        <form>
+                            <div class="form-group">
+                                <label for="Mprice">قیمت : </label>
+                                <span class="text-success" id="Mprice"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Mdesc"> توضیحات این سند : </label>
+                                <span class="text-success" id="Mdesc"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Mtype">نوع هزینه : </label>
+                                <span class="text-success" id="Mtype"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Mdate">تاریخ ثبت شده  : </label>
+                                <span class="text-success" id="Mdate"></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modalConfirm" class="modal">
+            <div class="container">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">حذف شود؟</h5>
+                        </div>
+                        <div class="modal-body">
+                                <p>آیا از حدف این داده اطمینان دارید؟</p>
+                        </div>
+                        <div class="text-center">
+                            <input type="hidden" id="_id" value="">
+                            <button onclick="deleteRow();" class="btn btn-xs btn-success">بله</button>
+                            <button class="btn btn-md btn-warning" type="button" data-dismiss="modal">خیر</button>
+                        </div>
+                        <div class="modal-footer">
+<!--                            <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+</div>
+<script src="js/jquery.min.js" ></script>
+<script src="js/persianDatepicker.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="./index.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#dateTime").persianDatepicker({
+            showGregorianDate: !1,
+            persianNumbers: !0,
+            formatDate: "YYYY/MM/DD",
+            selectedBefore: !1,
+            selectedDate: null,
+            startDate: null,
+            endDate: null,
+            prevArrow: '\u25c4',
+            nextArrow: '\u25ba',
+            theme: 'default',
+            alwaysShow: !1,
+            selectableYears: null,
+            selectableMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            cellWidth: 25, // by px
+            cellHeight: 20, // by px
+            fontSize: 13, // by px
+            isRTL: !1,
+        });
+    });
+</script>
 </body>
 </html>
