@@ -1,15 +1,7 @@
-// var reply_click = function () {
-//     alert("Button clicked, id " + this.id + ", text" + this.innerHTML);
-// }
-//  function showInsertDataItem() {
-//     const x = document.getElementById("insertedItemDiv");
-//     if (x.style.display === "none") {
-//         x.style.display = "block";
-//     } else {
-//         x.style.display = "none";
-//     }
-// }
+// created by naser.zare
+// practice roocket . complete 3 step
 
+// ثبت داده جدید در استوریج
 function insertNewDataItem() {
     const price = document.getElementById('price').value;
     const type = document.getElementById('type').value;
@@ -45,6 +37,9 @@ function insertNewDataItem() {
 
 }
 
+//متد اجرای ثبت داده اولیه در استوریج
+// لود داده های ثبتی و نمایش در جدول
+// اجرای پلاگین نمودار
 function callFunctionStart() {
     // defined default data in load page.
     const d = new Date();
@@ -120,23 +115,27 @@ function callFunctionStart() {
 
 }
 
-function jalaliToGregorian(myDate, seperator){
+// تبدیل تاریخ شمسی به جلالی - از سایت استک آنرا برداشتم
+function jalaliToGregorian(myDate, seperator) {
     var myDate = myDate,
         dateSplitted = myDate.split(seperator),
         jD = JalaliDate.jalaliToGregorian(dateSplitted[0], dateSplitted[1], dateSplitted[2]);
-    return  (jD[0] + seperator + jD[1] + seperator + jD[2]);
+    return (jD[0] + seperator + jD[1] + seperator + jD[2]);
     // console.log(jResult);
 }
 
+// تابع جداکننده رقم
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+// نمایش مودال حذف
 function showDeleteConfirm(id) {
     document.getElementById('_id').value = id;
     $("#modalConfirm").modal('show');
 }
 
+// متد حذف رکورد از استوریج
 function deleteRow() {
     const id = document.getElementById('_id').value;
     const storedNames = JSON.parse(localStorage.getItem("data_practice"));
@@ -150,6 +149,7 @@ function deleteRow() {
     location.reload();
 }
 
+// مودال نمایش مشخصات
 function openModal(id) {
     const storedNames = JSON.parse(localStorage.getItem("data_practice"));
     const newData = storedNames.filter(function (ele) {
@@ -164,6 +164,7 @@ function openModal(id) {
     $("#exampleModal").modal('show');
 }
 
+// متد اجرای چارت - از اینترنت گرفته شده
 function createChartJs(depositNumber, withdrawNumber) {
     let options = {
         exportEnabled: true,
@@ -246,7 +247,7 @@ JalaliDate = {
     g_days_in_month: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
     j_days_in_month: [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29]
 };
-JalaliDate.jalaliToGregorian = function(j_y, j_m, j_d) {
+JalaliDate.jalaliToGregorian = function (j_y, j_m, j_d) {
     j_y = parseInt(j_y);
     j_m = parseInt(j_m);
     j_d = parseInt(j_d);
@@ -300,3 +301,15 @@ JalaliDate.jalaliToGregorian = function(j_y, j_m, j_d) {
 window.onload = callFunctionStart;
 document.getElementById('btnInserted').onclick = insertNewDataItem;
 
+
+// var reply_click = function () {
+//     alert("Button clicked, id " + this.id + ", text" + this.innerHTML);
+// }
+//  function showInsertDataItem() {
+//     const x = document.getElementById("insertedItemDiv");
+//     if (x.style.display === "none") {
+//         x.style.display = "block";
+//     } else {
+//         x.style.display = "none";
+//     }
+// }

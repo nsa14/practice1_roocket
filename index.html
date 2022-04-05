@@ -9,7 +9,7 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/ffa/font-face.css">
-    <link rel="stylesheet" href="css/persianDatepicker-default.css" />
+    <link rel="stylesheet" href="css/persianDatepicker-default.css"/>
 </head>
 <body>
 <div class="container">
@@ -35,12 +35,12 @@
                         <label> تاریخ:
                             <input required class="form-control" type="text" name="dateTime"
                                    id="dateTime"/>
-<!--                            <input placeholder=" 21 روز" required class="form-control" type="number" name="day"-->
-<!--                                   id="day"/>-->
-<!--                            <input placeholder="ماه 10" required class="form-control" type="number" name="month"-->
-<!--                                   id="month"/>-->
-<!--                            <input placeholder="سال 1401" required class="form-control" type="number" name="year"-->
-<!--                                   id="year"/>-->
+                            <!--                            <input placeholder=" 21 روز" required class="form-control" type="number" name="day"-->
+                            <!--                                   id="day"/>-->
+                            <!--                            <input placeholder="ماه 10" required class="form-control" type="number" name="month"-->
+                            <!--                                   id="month"/>-->
+                            <!--                            <input placeholder="سال 1401" required class="form-control" type="number" name="year"-->
+                            <!--                                   id="year"/>-->
                         </label>
 
                         <button class="btn btn-md btn-primary" id="btnInserted"> ثبت جدید</button>
@@ -52,9 +52,12 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">موجودی صندوق</h5>
-                    <a href="#" class="badge badge-success">هزینه : <span id="deposit" class="h3 badge badge-pill badge-success"></span> تومان
+                    <a href="#" class="badge badge-success">هزینه : <span id="deposit"
+                                                                          class="h3 badge badge-pill badge-success"></span>
+                        تومان
                     </a>
-                    <a href="#" class="badge badge-danger h3"> خرج کرد : <span id="withdraw" class="h3 badge badge-pill badge-danger"></span>تومان</a>
+                    <a href="#" class="badge badge-danger h3"> خرج کرد : <span id="withdraw"
+                                                                               class="h3 badge badge-pill badge-danger"></span>تومان</a>
 
                     <div id="chartContainer" style="height: 300px; width: 100%;"></div>
                 </div>
@@ -79,8 +82,9 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog"  role="document">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"> نمایش اطلاعات </h5>
@@ -107,7 +111,7 @@
                                 <span class="text-success" id="Mtype"></span>
                             </div>
                             <div class="form-group">
-                                <label for="Mdate">تاریخ ثبت شده  : </label>
+                                <label for="Mdate">تاریخ ثبت شده : </label>
                                 <span class="text-success" id="Mdate"></span>
                             </div>
                         </form>
@@ -119,37 +123,39 @@
             </div>
         </div>
     </div>
-    <div id="modalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade">
-            <div class="container">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">حذف شود؟</h5>
-                        </div>
-                        <div class="modal-body">
-                                <p>آیا از حدف این داده اطمینان دارید؟</p>
-                        </div>
+    <!--    modalConfirm-->
+    <div id="modalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+         class="modal fade">
+        <div class="container">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">حذف شود؟</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>آیا از حدف این داده اطمینان دارید؟</p>
+                    </div>
+                    <div class="modal-footer">
                         <div class="text-center">
                             <input type="hidden" id="_id" value="">
                             <button onclick="deleteRow();" class="btn btn-xs btn-success">بله</button>
                             <button class="btn btn-md btn-warning" type="button" data-dismiss="modal">خیر</button>
                         </div>
-                        <div class="modal-footer">
-<!--                            <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>-->
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
     </div>
 
 </div>
-<script src="js/jquery.min.js" ></script>
+<script src="js/jquery.min.js"></script>
 <script src="js/persianDatepicker.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 <script src="./index.js"></script>
 <script type="text/javascript">
-    $(function() {
+    $(function () {
         $("#dateTime").persianDatepicker({
             showGregorianDate: !1,
             persianNumbers: !0,
@@ -171,6 +177,5 @@
         });
     });
 </script>
-<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 </body>
 </html>
