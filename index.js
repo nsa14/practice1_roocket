@@ -27,13 +27,16 @@ function insertNewDataItem() {
 
     const oldData = JSON.parse(localStorage.getItem("data_practice"));
     let lastId = oldData.slice(-1).pop()
+    const d = new Date();
+    const dateString = d.getFullYear() + "/" + d.getMonth() + "/" + d.getDate();
 
     const arrayNewData = {
         "id": lastId.id + 1,
         "price": parseInt(price),
         "desc": desc,
         "type": parseInt(type),
-        "date": dateTime
+        "date": dateTime,
+        "dateEn": 'dateString'
     };
     // oldData.push(JSON.stringify(arrayNewData));
     oldData.push(arrayNewData);
@@ -44,22 +47,26 @@ function insertNewDataItem() {
 
 }
 
- function callFunctionStart() {
+function callFunctionStart() {
     // defined default data in load page.
+    const d = new Date();
+    const dateString = d.getFullYear() + "/" + d.getMonth() + "/" + d.getDate();
     const data = [
         {
             "id": 1,
             "price": 5000,
             "desc": "واریزی توسط اقای ایمانی",
             "type": 1,
-            "date": new Date(),
+            "date": '1401/01/16',
+            "dateEn": dateString,
         },
         {
             "id": 2,
             "price": 3000,
             "desc": "برداشت از صندوق توسط آقای ایمانی - خرید لامپ",
             "type": 2,
-            "date": new Date(),
+            "date": '1401/01/16',
+            "dateEn": dateString,
         }
     ];
 
@@ -96,15 +103,34 @@ function insertNewDataItem() {
     document.getElementById('deposit').innerHTML = numberWithCommas(totalSalaryDeposit);
     document.getElementById('withdraw').innerHTML = numberWithCommas(totalSalaryWithdraw);
 
+    // for chart
+    const depositData = storedNames.filter(function (ele) {
+        return ele.type === parseInt('1');
+    });
+    const withdrawData = storedNames.filter(function (ele) {
+        return ele.type === parseInt('2');
+    });
+
+    // let depositNumber =depositData.map((data,i)=>
+    //     [{ "x": data.date,  "y": data.price }]
+    // );
+    let depositNumber = depositData.map(data => ({'x': new Date(data.dateEn), 'y': data.price}));
+    let withdrawNumber = withdrawData.map(data => ({'x': new Date(data.dateEn), 'y': data.price}));
+    console.log(JSON.stringify(depositNumber))
+    // console.log(depositNumber)
+    createChartJs(depositNumber, withdrawNumber);
+
 }
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-function showDeleteConfirm(id){
+
+function showDeleteConfirm(id) {
     document.getElementById('_id').value = id;
     $("#modalConfirm").modal('show');
 }
+
 function deleteRow() {
     const id = document.getElementById('_id').value;
     const storedNames = JSON.parse(localStorage.getItem("data_practice"));
@@ -124,12 +150,89 @@ function openModal(id) {
         return ele.id === id;
     });
 
-    document.getElementById('Mprice').innerHTML=newData[0].price;
-    document.getElementById('Mdesc').innerHTML= newData[0].desc;
-    document.getElementById('Mtype').innerHTML= newData[0].type ===1 ? 'واریز' : 'برداشت';
-    document.getElementById('Mdate').innerHTML= newData[0].date;
+    document.getElementById('Mprice').innerHTML = newData[0].price;
+    document.getElementById('Mdesc').innerHTML = newData[0].desc;
+    document.getElementById('Mtype').innerHTML = newData[0].type === 1 ? 'واریز' : 'برداشت';
+    document.getElementById('Mdate').innerHTML = newData[0].date;
 
     $("#exampleModal").modal('show');
+}
+
+function createChartJs(depositNumber, withdrawNumber) {
+    var options = {
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            text: "نمودار هزینه درامد"
+        },
+        subtitles: [{
+            text: "روی هر داده کلیک نماید تا مخفی/نمایان شود"
+        }],
+        axisX: {
+            title: "بر اساس ماه"
+        },
+        axisY: {
+            title: "Units Sold",
+            titleFontColor: "#4F81BC",
+            lineColor: "#4F81BC",
+            labelFontColor: "#4F81BC",
+            tickColor: "#4F81BC"
+        },
+        axisY2: {
+            title: "Profit in USD",
+            titleFontColor: "#C0504E",
+            lineColor: "#C0504E",
+            labelFontColor: "#C0504E",
+            tickColor: "#C0504E"
+        },
+        toolTip: {
+            shared: true
+        },
+        legend: {
+            cursor: "pointer",
+            itemclick: toggleDataSeries
+        },
+        data: [{
+            type: "spline",
+            name: "واریز",
+            showInLegend: true,
+            xValueFormatString: "MMM YYYY",
+            yValueFormatString: "#,##0 Units",
+            dataPoints: depositNumber
+
+            //
+            // dataPoints: [
+            //     { x: new Date(2016, 0, 1),  y: 120 },
+            //     { x: new Date(2016, 1, 1), y: 135 },
+            //     { x: new Date(2016, 11, 1), y: 200 }
+            // ]
+        },
+            {
+                type: "spline",
+                name: "برداشت",
+                axisYType: "secondary",
+                showInLegend: true,
+                xValueFormatString: "MMM YYYY",
+                yValueFormatString: "$#,##0.#",
+                dataPoints: withdrawNumber
+                // dataPoints: [
+                //     {x: new Date(2016, 0, 1), y: 19034.5},
+                //     {x: new Date(2016, 1, 1), y: 20015},
+                //     {x: new Date(2016, 11, 1), y: 32534}
+                // ]
+            }]
+    };
+    $("#chartContainer").CanvasJSChart(options);
+
+    function toggleDataSeries(e) {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        } else {
+            e.dataSeries.visible = true;
+        }
+        e.chart.render();
+    }
+
 }
 
 

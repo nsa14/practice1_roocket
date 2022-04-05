@@ -56,17 +56,14 @@
                     </a>
                     <a href="#" class="badge badge-danger h3"> خرج کرد : <span id="withdraw" class="h3 badge badge-pill badge-danger"></span></a>
 
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="table-responsive pt-3">
-        <table border="0" class="table table-striped table-dark " style="border-radius: 20px !important;">
+        <table class="table table-striped table-dark " style="border-radius: 20px !important;">
             <thead>
             <tr>
                 <th>ردیف</th>
@@ -83,7 +80,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog"  role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"> نمایش اطلاعات </h5>
@@ -122,7 +119,7 @@
             </div>
         </div>
     </div>
-    <div id="modalConfirm" class="modal">
+    <div id="modalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade">
             <div class="container">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -174,5 +171,6 @@
         });
     });
 </script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 </body>
 </html>
